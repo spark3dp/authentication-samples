@@ -1,0 +1,5 @@
+bin
+obj
+Web.Debug.config
+Web.Release.config
+spark-auth-sample-csharp.csproj.user

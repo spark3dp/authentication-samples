@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Spark Sample Application Callback</title>
+</head>
+
+<body>
+
+<!-- spark sdk -->
+<script type="text/javascript" src="//code.spark.autodesk.com/autodesk-spark-sdk-latest.min.js"></script>
+
+<!-- your config file and initialization -->
+<script type="text/javascript" charset="utf-8" src="assets/scripts/config.js"></script>
+<script type="text/javascript" charset="utf-8" src="assets/scripts/init.js"></script>
+
+<script>
+
+	/**
+	 * Get the code param in URL after returning from Spark Auth flow
+	 */
+	function extractRedirectionCode() {
+		var getParams = ADSKSpark.Helpers.extractParamsFromURL();
+		return getParams['code'] ? getParams['code'] : null;
+	}
+
+
+	var code = extractRedirectionCode();
+
+	if (code) {
+		ADSKSpark.Client.completeLogin(code).then(function (token) {
+			if (token) {
+				if (window.opener){
+
+					window.opener.location.reload(true);
+					//close the login window
+					window.close();
+				}else {
+					window.parent.location.reload();
+				}
+			} else {
+				console.error('Problem with fetching token');
+			}
+		}, function (error) {
+			console.error(error);
+		});
+	}
+</script>
+</body>
+</html>
