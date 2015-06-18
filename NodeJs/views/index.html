@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Spark Sample Application - Authentication</title>
+    <meta charset="utf-8">
+    <!-- fonts -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans';
+            font-size: 14px;
+            font-weight: 400;
+            color: #333333;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: 5px;
+        }
+
+        a {
+            cursor: pointer;
+            color: #eb5528;
+            font-weight: 400;
+            text-decoration: none;
+            outline: 0;
+        }
+
+        a:hover, a:active, a.clicked, a:focus {
+            text-decoration: none;
+            outline: 0;
+            color: #eb5528;
+        }
+
+        a[disabled] {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        a.mono {
+            color: #333333;
+            text-transform: uppercase;
+        }
+
+        a:hover {
+            text-decoration: initial;
+        }
+
+        a.disabled{
+            pointer-events:none;
+            color: darkgrey;
+        }
+
+        label {
+            font-weight: normal;
+        }
+
+        .spark_btn {
+            display: inline-block;
+            color: #EA5426;
+            background: transparent;
+            font-weight: 600;
+            border-radius: 3px;
+            border: 1px solid #EA5426;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            /* medium size is default */
+            height: 40px;
+            line-height: 40px;
+            padding: 0px 32px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .spark_btn.empty{
+            background: white;
+        }
+
+        .spark_btn:hover {
+            color: #EA5426;
+        }
+
+        .spark_btn.primary {
+            background: #eb5528;
+            color: white;
+            font-weight: 400;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .spark_btn.primary:hover, .spark_btn.primary:active, .spark_btn.primary.clicked {
+            background: #f35525;
+            color: white;
+
+        }
+
+        .spark_btn.xsmall {
+            height: 26px;
+            line-height: 26px;
+            padding: 0px 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .spark_btn.small {
+            height: 30px;
+            line-height: 30px;
+            padding: 0px 20px;
+            font-size: 12px;
+        }
+
+        .spark_btn.large {
+            height: 50px;
+            line-height: 49px;
+            padding: 0px 60px;
+            font-size: 16px;
+        }
+
+        .spark_btn[disabled] {
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        .container{
+            width:768px;
+        }
+        #welcome-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            padding-right: 40px;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <div id="welcome-wrapper">
+                <h2>Welcome to <br/>Spark NodeJS Authentication Sample App</h2>
+                <p>To try the sample, you need to login with a test environment account.</p>
+
+                <div class="col-md-12">
+                    <p class="token-wrapper">Guest Token:
+                        <b id="guest-token-span">
+                        <% if (guestToken){ %>
+                            <%= guestToken.access_token %>
+                        <% }else{ %>   
+                            none
+                        <% } %>   
+                        </b>
+                    </p>
+
+                    <p class="token-wrapper" id="access-token">
+                        Access Token:
+                        <b id="access-token-span">
+                        <% if (accessToken){ %>
+                            <%= accessToken.access_token %>
+                        <% }else{ %>   
+                            none
+                        <% } %> 
+                        </b>
+                    </p>
+
+                    <p class="token-wrapper">Refresh Token:
+                        <b id="refresh-token-span">
+                        <% if (accessToken){ %>
+                            <%= accessToken.refresh_token %>
+                        <% }else{ %>   
+                            none
+                        <% } %> 
+                        </b>
+                    </p>
+                    <% if (!accessToken){ %>
+                    <a id="login" class="spark_btn primary" href="/auth">Login to Get an Access Token</a>
+                    <% } %>
+
+                    <% if (accessToken){ %>
+                    <a id="logout" href="/logout" class="spark_btn primary">Logout</a>
+                    <% } %>
+
+                    <% if (accessToken){ %>
+                    <a id="refresh_token" href="/refresh_token" class="spark_btn">Refresh access token</a>
+                    <% } %>
+                    <a class="spark_btn"  href="/guest_token">Get Guest Token</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
