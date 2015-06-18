@@ -6,7 +6,7 @@ This is a sample code for using spark authentication api.
 
 Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 
-Set you Callback URL to be the your server's path
+Set you Callback URL to be your server's path (i.e. http://your-server:3000/)
 
 ## Configuration
 
@@ -29,5 +29,3 @@ $ node server.js
 ## Usage
 
 To start using this sample you just have to browse to http://your-server:3000/
-
-
