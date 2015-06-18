@@ -56,7 +56,7 @@ app.get('/callback', function (req, res) {
 
   var contentLength = params.length,
     headers = {
-      'Authorization': 'Basic ' + toBase64(config.APP_KEY + ':' + config.APP_SECRET),
+      'Authorization': 'Basic ' + toBase64(APP_KEY + ':' + APP_SECRET),
       'Content-Type' : 'application/x-www-form-urlencoded',
       'Content-Length': contentLength
     };
