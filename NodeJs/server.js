@@ -34,7 +34,13 @@ var authorization_uri = API_URL +
                 '&client_id=' + APP_KEY + 
                 '&redirect_uri=' + REDIRECT_URI;
 
-// Initial page redirecting to Github
+
+// Show the index page
+app.get('/', function (req, res) {
+  res.render('index.html',{accessToken:accessToken,guestToken:guestToken});
+});
+
+// Initial page redirecting to Spark Login
 app.get('/auth', function (req, res) {
     res.redirect(authorization_uri);
 });
@@ -68,10 +74,6 @@ app.get('/callback', function (req, res) {
     res.redirect('/');
   });
 
-});
-
-app.get('/', function (req, res) {
-  res.render('index.html',{accessToken:accessToken,guestToken:guestToken});
 });
 
 // Guest token service
@@ -136,6 +138,7 @@ app.get('/refresh_token', function(req, res) {
 
 });
 
+//logout endpoint
 app.get('/logout', function(req, res){
   accessToken = null;
   guestToken = null;
