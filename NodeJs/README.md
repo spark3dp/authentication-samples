@@ -16,8 +16,6 @@ Open the config.js file:
 
  2. Set your APP_SECRET with your App Secret.
 
- 3. Set your REDIRECT_URI to http://your-server:3000/callback
-
 ## To run the server
 * [Install nodejs and npm](https://docs.npmjs.com/getting-started/installing-node)
 * Run:
