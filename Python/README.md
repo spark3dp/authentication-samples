@@ -18,4 +18,12 @@ Open the SparkOAuth.py file:
 
 ## Usage
 
-To start using this sample you just have to browse http://localhost:8089/signin
+To start using this sample:
+
+ 0. Open terminal and "cd" to the directory
+
+ 1. run "pip install -r requirements.txt".
+
+ 2. run "python SparkOAuth.py".
+
+ 3. Open in your favorite browser: http://localhost:8089/signin
