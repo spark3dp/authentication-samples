@@ -8,16 +8,14 @@ var APP_KEY = config.APP_KEY,
 
 var express = require('express'),
     request = require('request');
-    app = express();
+    app = express(),
+    session = require('express-session');
 
 app.set('views', './views')
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-
-var accessToken = null,
-    guestToken = null,
-    redirectUri;
+app.use(session({ secret: 'spark secret string', cookie: { maxAge: 7200000 }}))
 
 
 /*** FUNCTIONS ***/
@@ -32,16 +30,20 @@ var toBase64 = function(str){
 }
 
 
+var redirectUri = function(req){
+  var fullUrl = req.protocol + '://' + req.get('host');
+  return fullUrl + '/callback';  
+}
+
 /**
  * Spark Authorization URL endpoint 
  */
 var authorizationUrl = function(req){
-  var fullUrl = req.protocol + '://' + req.get('host');
-  redirectUri = fullUrl + '/callback';
+
   return API_URL + '/oauth/authorize' +
                 '?response_type=code' +
                 '&client_id=' + APP_KEY + 
-                '&redirect_uri=' + redirectUri;
+                '&redirect_uri=' + redirectUri(req);
 }
 
 /**
@@ -74,7 +76,7 @@ var doRequest = function(url, params,callback){
 
 // Show the index page
 app.get('/', function (req, res) {
-  res.render('index.html',{accessToken:accessToken,guestToken:guestToken});
+  res.render('index.html',{accessToken:req.session.accessToken,guestToken:req.session.guestToken});
 });
 
 // Initial page redirecting to Spark Login
@@ -87,11 +89,11 @@ app.get('/auth', function (req, res) {
 app.get('/callback', function (req, res) {
   var code = req.query.code,
       url =  API_URL + '/oauth/accesstoken',
-      params = "code=" + code + "&grant_type=authorization_code&response_type=code&redirect_uri=" + redirectUri;
+      params = "code=" + code + "&grant_type=authorization_code&response_type=code&redirect_uri=" + redirectUri(req);
 
   doRequest(url, params, function(token){
     if (token.access_token){
-      accessToken = token;
+      req.session.accessToken = token;
     }else{
       console.log('error getting token', token);
     }
@@ -106,7 +108,7 @@ app.get('/guest_token', function(req, res){
       url =  API_URL + '/oauth/accesstoken';
   doRequest(url, params, function(token){
     if (token.access_token){
-      guestToken = token;
+      req.session.guestToken = token;
     }else{
       console.log('error getting token', token);
     }
@@ -123,7 +125,7 @@ app.get('/refresh_token', function(req, res) {
         url =  API_URL + '/oauth/refreshtoken';
     doRequest(url, params, function(token){
       if (token.access_token){
-        accessToken = token;
+        req.session.accessToken = token;
       }else{
         console.log('error getting token', token);
       }
