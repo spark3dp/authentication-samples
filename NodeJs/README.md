@@ -18,7 +18,7 @@ Open the config.js file:
 
 ## To run the server
 * [Install nodejs and npm](https://docs.npmjs.com/getting-started/installing-node)
-* Run:
+* Run inside the Nodejs directory:
 ```sh
 $ npm install
 $ node server.js

@@ -6,7 +6,7 @@ This is a sample code for using spark authentication api.
 
 Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 
-Set you Callback URL to be your server's path (i.e. http://your-server:3000/)
+Set you Callback URL to be your server's path (i.e. http://your-server:4567/)
 
 ## Configuration
 
@@ -18,11 +18,12 @@ Open the config.rb file:
 
 ## To run the server
 * [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Ruby gems](https://rubygems.org/pages/download)
-* Install the Sinatra gem:
+* Install sinatra and erubis gems:
 ```sh
 $ gem install sinatra
+$ gem install erubis
 ```
-* Run:
+* Run inside the Ruby directory:
 ```sh
 $ ruby app.rb
 ```
