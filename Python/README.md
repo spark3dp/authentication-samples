@@ -26,4 +26,4 @@ To start using this sample:
 
  2. run "python SparkOAuth.py".
 
- 3. Open in your favorite browser: http://localhost:8089/signin
+ 3. Open in your favorite browser: http://localhost:8089
