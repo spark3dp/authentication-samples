@@ -1,10 +1,14 @@
 package spark;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -37,11 +41,34 @@ import com.google.common.collect.ImmutableMap;
 public class SparkOauthServer {
 
 	private Server server = new Server(8089);
-	
-	public static void main(String[] args) throws Exception {
-		new SparkOauthServer().startJetty();
+	private String templateString = "";
+    private String ACCESS_TOKEN_KEY = "java_auth_sample_spark_access_token";
+    private String GUEST_TOKEN_KEY = "java_auth_sample_spark_guest_token";
+    private String REFRESH_TOKEN_KEY = "java_auth_sample_spark_refresh_token";
+
+
+    public static void main(String[] args) throws Exception {
+        //templateString = getTemplateString();
+        new SparkOauthServer().startJetty();
 	}
-	
+
+    private void setTemplateString() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("spark-template.html"));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            templateString = sb.toString();
+        } finally {
+            br.close();
+        }
+    }
+
 	public void startJetty() throws Exception {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
@@ -49,15 +76,38 @@ public class SparkOauthServer {
         server.setHandler(context);
  
         // map servlets to endpoints
+        context.addServlet(new ServletHolder(new IndexServlet()),"/");
         context.addServlet(new ServletHolder(new SigninServlet()),"/signin");        
         context.addServlet(new ServletHolder(new CallbackServlet()),"/callback");
+        context.addServlet(new ServletHolder(new LogoutServlet()), "/logout");
+        context.addServlet(new ServletHolder(new GuestTokenServlet()), "/guest");
+        context.addServlet(new ServletHolder(new RefreshTokenServlet()), "/refresh");
 
-        System.out.println("To start, go to: http://localhost:8089/signin");
+        System.out.println("To start, go to: http://localhost:8089/");
+
+        setTemplateString();
 
         server.start();
 
         server.join();
 
+    }
+
+    public String getAuthorizationHeader(String appId,String appSecret){
+
+        String authorizationStr = (appId+":"+ appSecret);
+        byte[]   bytesEncoded = Base64.encodeBase64(authorizationStr.getBytes());
+        String authorizationEncoded = "Basic " + new String(bytesEncoded) ;
+
+        return  authorizationEncoded;
+    }
+
+
+    class IndexServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+            resp.getWriter().println(templateString);
+        }
     }
 
 	class SigninServlet extends HttpServlet {
@@ -70,6 +120,68 @@ public class SparkOauthServer {
 			resp.sendRedirect(oauthUrl.toString());
 		}	
 	}
+
+    class GuestTokenServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+            String authorizationEncoded = getAuthorizationHeader(Config.CLIENT_ID,Config.CLIENT_SECRET);
+
+            String body = post(Config.TOKEN_URI, ImmutableMap.<String, String>builder()
+                            .put("grant_type", "client_credentials").build(),
+                    ImmutableMap.<String, String>builder().put("Authorization", authorizationEncoded).build());
+
+            JSONObject jsonObject = null;
+
+            // get the access token from json
+            try {
+                jsonObject = (JSONObject) new JSONParser().parse(body);
+            } catch (ParseException e) {
+                throw new RuntimeException("Unable to parse json " + body);
+            }
+
+            System.out.println("Response from Spark:"+jsonObject.toJSONString());
+
+            String guestToken = (String) jsonObject.get("access_token");
+
+            // store the token in a cookie
+            resp.addCookie(new Cookie(GUEST_TOKEN_KEY,guestToken));
+
+            resp.sendRedirect("/");
+        }
+    }
+
+
+    class RefreshTokenServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+            String authorizationEncoded = getAuthorizationHeader(Config.CLIENT_ID,Config.CLIENT_SECRET);
+
+            String body = post(Config.REFRESH_TOKEN_URI, ImmutableMap.<String, String>builder()
+                            .put("grant_type", "refresh_token")
+                            .put("refresh_token", req.getParameter("refresh_token")).build(),
+                    ImmutableMap.<String, String>builder().put("Authorization", authorizationEncoded).build());
+
+            JSONObject jsonObject = null;
+
+            // get the access token from json
+            try {
+                jsonObject = (JSONObject) new JSONParser().parse(body);
+            } catch (ParseException e) {
+                throw new RuntimeException("Unable to parse json " + body);
+            }
+
+            System.out.println("Response from Spark:"+jsonObject.toJSONString());
+
+            String accessToken = (String) jsonObject.get("access_token");
+            String refreshToken = (String) jsonObject.get("refresh_token");
+
+            // store the token in a cookie
+            resp.addCookie(new Cookie(ACCESS_TOKEN_KEY,accessToken));
+            resp.addCookie(new Cookie(REFRESH_TOKEN_KEY,refreshToken));
+
+            resp.sendRedirect("/");
+        }
+    }
 	
 	class CallbackServlet extends HttpServlet {
 		@Override
@@ -79,18 +191,11 @@ public class SparkOauthServer {
 				resp.getWriter().println(req.getParameter("error"));
 				return;
 			}
-			
-			// Spark returns a code that can be exchanged for a access token
-			String code = req.getParameter("code");
-			String authorizationStr = (Config.CLIENT_ID+":"+ Config.CLIENT_SECRET);
-			
-			byte[]   bytesEncoded = Base64.encodeBase64(authorizationStr.getBytes());
-			
-			String authorizationEncoded = "Basic " + new String(bytesEncoded) ; 
-			System.out.println("Authorization header is: " + authorizationEncoded );
+
+            String code = req.getParameter("code");
+            String authorizationEncoded = getAuthorizationHeader(Config.CLIENT_ID,Config.CLIENT_SECRET);
 
 			// get the access token by post to Spark
-
 			String body = post(Config.TOKEN_URI, ImmutableMap.<String,String>builder()
 					.put("code", code).put("response_type", "code").put("grant_type", "authorization_code").build(),
 					ImmutableMap.<String,String>builder().put("Authorization", authorizationEncoded).build());
@@ -108,15 +213,34 @@ public class SparkOauthServer {
             System.out.println("Response from Spark:"+jsonObject.toJSONString());
 
 			String accessToken = (String) jsonObject.get("access_token");
+            String refreshToken = (String) jsonObject.get("refresh_token");
 
 			// store the token in a cookie
-            resp.addCookie(new Cookie("java_auth_sample_spark_access_token",accessToken));
+            resp.addCookie(new Cookie(ACCESS_TOKEN_KEY,accessToken));
+            resp.addCookie(new Cookie(REFRESH_TOKEN_KEY,refreshToken));
 
-
-			resp.getWriter().println("Your accessToken is: " +accessToken + "\n");
-            resp.getWriter().println("Your accessToken is now also set in a cookie for a future use.");
+            resp.sendRedirect("/");
 		}	
 	}
+
+
+    class LogoutServlet extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+
+            //TODO: call logout API
+
+            Cookie cookie1 = new Cookie(ACCESS_TOKEN_KEY,"");
+            cookie1.setMaxAge(0);
+            Cookie cookie2 = new Cookie(REFRESH_TOKEN_KEY,"");
+            cookie2.setMaxAge(0);
+
+            resp.addCookie(cookie1);
+            resp.addCookie(cookie2);
+
+            resp.sendRedirect("/");
+        }
+    }
 	
 	// makes a GET request to url and returns body as a string
 	public String get(String url) throws ClientProtocolException, IOException {
