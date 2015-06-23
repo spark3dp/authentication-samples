@@ -18,5 +18,9 @@ Open the Config.java file:
 
 ## Usage
 
-To start using this sample you just have to browse http://localhost:8089/signin
+Import the project into your favorite IDE.
+
+Run SparkOauthServer.java as a regular java application.
+
+To start using this sample you just have to browse http://localhost:8089/
 
