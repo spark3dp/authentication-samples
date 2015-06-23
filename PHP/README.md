@@ -8,6 +8,8 @@ Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and 
 
 Set you Callback URL to be the path to where you browse auth.php.
 
+Don't forget to add http:// or https:// prefix to the Callback URL.
+
 ## Configuration
 
 Open the config.php file:
