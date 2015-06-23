@@ -17,5 +17,6 @@ public class Config {
     public static String LOGIN_URI= SPARK_ENDPOINT + "/api/v1/oauth/authorize";
     public static String TOKEN_URI= SPARK_ENDPOINT + "/api/v1/oauth/accesstoken";
     public static String REFRESH_TOKEN_URI= SPARK_ENDPOINT + "/api/v1/oauth/refreshtoken";
+    public static int PORT = 8089;
 
 }

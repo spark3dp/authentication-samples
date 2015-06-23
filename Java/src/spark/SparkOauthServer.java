@@ -40,7 +40,7 @@ import com.google.common.collect.ImmutableMap;
 
 public class SparkOauthServer {
 
-	private Server server = new Server(8089);
+	private Server server = new Server(Config.PORT);
 	private String templateString = "";
     private String ACCESS_TOKEN_KEY = "java_auth_sample_spark_access_token";
     private String GUEST_TOKEN_KEY = "java_auth_sample_spark_guest_token";
