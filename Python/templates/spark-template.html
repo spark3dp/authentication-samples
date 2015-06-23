@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <title>Spark Sample Application - Authentication</title>
+    <meta charset="utf-8">
+    <!-- fonts -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+    body {
+        font-family: 'Open Sans';
+        font-size: 14px;
+        font-weight: 400;
+        color: #333333;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    h1, h2, h3 {
+        font-weight: 600;
+        letter-spacing: 5px;
+    }
+
+    a {
+        cursor: pointer;
+        color: #eb5528;
+        font-weight: 400;
+        text-decoration: none;
+        outline: 0;
+    }
+
+    pre{
+        text-align: left;
+        margin: 0;
+        border-radius: 0;
+        background-color: transparent;
+        border: 0;
+        font-size: 12px;
+        color:#ffffff;
+    }
+
+    a:hover, a:active, a.clicked, a:focus {
+        text-decoration: none;
+        outline: 0;
+        color: #eb5528;
+    }
+
+    a[disabled] {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    a.mono {
+        color: #333333;
+        text-transform: uppercase;
+    }
+
+    a:hover {
+        text-decoration: initial;
+    }
+
+    a.disabled{
+        pointer-events:none;
+        color: darkgrey;
+    }
+
+    label {
+        font-weight: normal;
+    }
+
+    .spark_btn {
+        display: inline-block;
+        color: #EA5426;
+        background: transparent;
+        font-weight: 600;
+        border-radius: 3px;
+        border: 1px solid #EA5426;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        /* medium size is default */
+        height: 40px;
+        line-height: 40px;
+        padding: 0px 32px;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .spark_btn.empty{
+        background: white;
+    }
+
+    .spark_btn:hover {
+        color: #EA5426;
+    }
+
+    .spark_btn.primary {
+        background: #eb5528;
+        color: white;
+        font-weight: 400;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+
+    .spark_btn.primary:hover, .spark_btn.primary:active, .spark_btn.primary.clicked {
+        background: #f35525;
+        color: white;
+
+    }
+
+    .spark_btn.xsmall {
+        height: 26px;
+        line-height: 26px;
+        padding: 0px 10px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .spark_btn.small {
+        height: 30px;
+        line-height: 30px;
+        padding: 0px 20px;
+        font-size: 12px;
+    }
+
+    .spark_btn.large {
+        height: 50px;
+        line-height: 49px;
+        padding: 0px 60px;
+        font-size: 16px;
+    }
+
+    .spark_btn[disabled] {
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    .container{
+        width:768px;
+    }
+    #welcome-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        padding-right: 40px;
+        height: auto;
+    }
+
+    /******* SPINNER **********/
+    .spinner {
+        height: 20px;
+        width: 20px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        -webkit-animation: rotation .6s infinite linear;
+        -moz-animation: rotation .6s infinite linear;
+        -o-animation: rotation .6s infinite linear;
+        animation: rotation .6s infinite linear;
+        border-left: 6px solid rgba(238, 96, 45, .15);
+        border-right: 6px solid rgba(238, 96, 45, .15);
+        border-bottom: 6px solid rgba(238, 96, 45, .15);
+        border-top: 6px solid rgba(238, 96, 45, 1);
+        border-radius: 100%;
+    }
+
+    @-webkit-keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+        }
+    }
+
+    @-moz-keyframes rotation {
+        from {
+            -moz-transform: rotate(0deg);
+        }
+        to {
+            -moz-transform: rotate(359deg);
+        }
+    }
+
+    @-o-keyframes rotation {
+        from {
+            -o-transform: rotate(0deg);
+        }
+        to {
+            -o-transform: rotate(359deg);
+        }
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(359deg);
+        }
+    }
+
+    /******* END SPINNER **********/
+
+</style>
+</header>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <div id="welcome-wrapper">
+                <h2>Welcome to <br/>Spark Python Authentication Sample App</h2>
+
+                <p>To try the sample, you need to login with a test environment account.</p>
+
+                <div class="col-md-12">
+                    <p class="token-wrapper">Guest Token:
+                        <b id="guest-token-span">
+                            {{ guestToken }}
+                        </b>
+                    </p>
+                    
+                    <p class="token-wrapper" id="access-token">
+                        Access Token:
+                        <b id="access-token-span">
+                            {{ accessToken }}
+                        </b>
+                    </p>
+
+                    <p class="token-wrapper">Refresh Token:
+                        <b id="refresh-token-span">
+                            {{refreshToken}}
+                        </b>
+                    </p>
+
+                    {% if accessToken == None %}
+                        <a id="login" class="spark_btn primary" href="signin">Login to Get an Access Token</a>
+                    {% else %}
+                        <a id="logout" href="logout" class="spark_btn primary">Logout</a>
+                        <a id="refresh_token" href="refresh" class="spark_btn">Refresh access token</a>
+                    {% endif %}
+
+                    <a class="spark_btn" href="guest">Get Guest Token</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
