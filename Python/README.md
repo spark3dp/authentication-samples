@@ -22,7 +22,7 @@ To start using this sample:
 
  0. Open terminal and "cd" to the directory
 
- 1. run "pip install -r requirements.txt".
+ 1. run "sudo pip install -r requirements.txt". (if you don't have "pip" - please install it by running "sudo easy_install pip")
 
  2. run "python SparkOAuth.py".
 
