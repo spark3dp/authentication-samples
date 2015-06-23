@@ -75,8 +75,6 @@ def callback():
 def logout():
 	resp = redirect("/", code=302)
 
-	#TODO call logout api
-
 	resp.set_cookie(REFRESH_TOKEN_KEY,  "",expires=-90)
 	resp.set_cookie(ACCESS_TOKEN_KEY, "",expires=-90)
 	return resp

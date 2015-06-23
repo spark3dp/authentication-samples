@@ -228,8 +228,6 @@ public class SparkOauthServer {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
 
-            //TODO: call logout API
-
             Cookie cookie1 = new Cookie(ACCESS_TOKEN_KEY,"");
             cookie1.setMaxAge(0);
             Cookie cookie2 = new Cookie(REFRESH_TOKEN_KEY,"");
