@@ -1,5 +1,5 @@
 module.exports = {
-	APP_KEY: '<put here your app key>',
-	APP_SECRET: '<put here your app secret>',
+	APP_KEY: '<put your app key here>',
+	APP_SECRET: '<put your app secret here>',
 	ENV: 'sandbox' //sandbox or production
 };
