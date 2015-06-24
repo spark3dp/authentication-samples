@@ -59,8 +59,8 @@ using namespace web::http::experimental::listener;
 //
 // Set key & secret pair to enable session for that service.
 //
-static const utility::string_t s_spark_key(U("<YourAppKey>"));
-static const utility::string_t s_spark_secret(U("<YourAppSecret>"));
+static const utility::string_t s_spark_key(U("APP_KEY"));
+static const utility::string_t s_spark_secret(U("APP_SECRET"));
 
 //
 // Utility method to open browser on Windows, OS X and Linux systems.
