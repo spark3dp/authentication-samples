@@ -20,7 +20,7 @@ After Installation, you can replace Oauth2Client.cpp file with the Oauth2Client.
 
 Open Oauth2Client.cpp file and:
 
- 1. Replace \<YourAppKey\> with your App Key.
+ 1. Replace APP_KEY with your App Key.
 
- 2. Replace \<YourAppSecret\> with your App Secret.
+ 2. Replace APP_SECRET with your App Secret.
 
