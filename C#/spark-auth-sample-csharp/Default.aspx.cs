@@ -13,10 +13,10 @@ namespace spark_auth_sample_csharp
 {
     public partial class Default : Page
     {
-        // Hard coded consumer and secret keys and base URL.
+        // Hard coded app and secret keys and base URL.
         // In real world Apps, these values need to be secured and preferably not hardcoded.
-        private const string m_ConsumerKey = "INSERT_APP_KEY_HERE";
-        private const string m_ConsumerSecret = "INSERT_SECRET_HERE";
+        private const string m_AppKey = "INSERT_APP_KEY_HERE";
+        private const string m_AppSecret = "INSERT_SECRET_HERE";
         private const string m_baseURL = "https://sandbox.spark.autodesk.com/api/v1";
 
         //you need to change the domain name and port number if you are using different ones.
@@ -73,7 +73,7 @@ namespace spark_auth_sample_csharp
         //redirect to spark signin/signup page
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string spark_url = m_baseURL + "/oauth/authorize?response_type=code&client_id=" + m_ConsumerKey + "&redirect_uri=" + m_CallbackURL;
+            string spark_url = m_baseURL + "/oauth/authorize?response_type=code&client_id=" + m_AppKey + "&redirect_uri=" + m_CallbackURL;
             Response.Redirect(spark_url);
         }
 
@@ -103,7 +103,7 @@ namespace spark_auth_sample_csharp
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = data.Length;
-            request.Headers.Add("Authorization", "Basic " + Base64Encode(m_ConsumerKey + ":" + m_ConsumerSecret));
+            request.Headers.Add("Authorization", "Basic " + Base64Encode(m_AppKey + ":" + m_AppSecret));
 
             using (var stream = request.GetRequestStream())
             {
@@ -143,7 +143,7 @@ namespace spark_auth_sample_csharp
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = data.Length;
-            request.Headers.Add("Authorization", "Basic " + Base64Encode(m_ConsumerKey + ":" + m_ConsumerSecret));
+            request.Headers.Add("Authorization", "Basic " + Base64Encode(m_AppKey + ":" + m_AppSecret));
 
             using (var stream = request.GetRequestStream())
             {
@@ -176,7 +176,7 @@ namespace spark_auth_sample_csharp
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = data.Length;
-            request.Headers.Add("Authorization", "Basic " + Base64Encode(m_ConsumerKey + ":" + m_ConsumerSecret));
+            request.Headers.Add("Authorization", "Basic " + Base64Encode(m_AppKey + ":" + m_AppSecret));
 
             using (var stream = request.GetRequestStream())
             {
