@@ -8,7 +8,7 @@ Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and 
 
 Set you Callback URL to http://localhost:8089/callback.
 
-Make sure you have JDK 1.7 installed.
+Make sure you have JDK 1.7 installed and Maven plugin for your IDE.
 
 ## Configuration
 
