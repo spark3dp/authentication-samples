@@ -178,9 +178,12 @@ label {
         var refreshToken=getCookie("java_auth_sample_spark_refresh_token");
         var guestToken=getCookie("java_auth_sample_spark_guest_token");
 
-        document.getElementById("access-token-span").innerHTML = accessToken;
-        document.getElementById("refresh-token-span").innerHTML = refreshToken;
-        document.getElementById("guest-token-span").innerHTML = guestToken;
+        if(accessToken)
+            document.getElementById("access-token-span").innerHTML = accessToken;
+        if(refreshToken)
+            document.getElementById("refresh-token-span").innerHTML = refreshToken;
+        if(guestToken)
+            document.getElementById("guest-token-span").innerHTML = guestToken;
 
         if(accessToken){
             document.getElementById("login").style.display = "none";
