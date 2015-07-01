@@ -1,12 +1,12 @@
 # spark-auth-sample-csharp
 
-This is a sample code for using spark authentication api.
+This code demonstrates calls to the Spark authentication API.
 
-## Create application on Spark developer portal
+## Create an application on the Spark developer portal
 
 Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 
-Set you Callback URL to be the path to where you browse Default.aspx.
+Set your Callback URL to the path you use to browse Default.aspx.
 
 ## Configuration
 
@@ -18,4 +18,4 @@ Open the Default.aspx.cs file:
 
 ## Usage
 
-To start using this sample you just have to browse Default.aspx
+Browse Default.aspx
