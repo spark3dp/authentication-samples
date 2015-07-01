@@ -1,12 +1,12 @@
 # spark-auth-sample-javascript
 
-This is a sample code for using spark authentication js sdk.
+This sample code demonstrates use of Spark authentication APIs with the JavaScript SDK.
 
-## Create application on Spark developer portal
+## Create an application on the Spark developers' portal
 
-Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
+Sign up to the [Spark Developers' Portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 
-Set your Callback URL to be the path to login-callback.html.
+Set the Callback URL on the API Keys tab to the path to login-callback.html.
 
 Example: http://your_web_server_address:port/login-callback.html.
 
