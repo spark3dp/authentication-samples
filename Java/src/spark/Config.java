@@ -13,6 +13,8 @@ public class Config {
     //TODO: enter your CLIENT_SECRET from Developer Portal App page
     public static String CLIENT_SECRET ="YOUR_APP_SECRET";
 
+    public static String REDIRECT_URI ="http://localhost:8089/callback";
+
     public static String SPARK_ENDPOINT = "https://sandbox.spark.autodesk.com";
     public static String LOGIN_URI= SPARK_ENDPOINT + "/api/v1/oauth/authorize";
     public static String TOKEN_URI= SPARK_ENDPOINT + "/api/v1/oauth/accesstoken";

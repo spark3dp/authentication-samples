@@ -197,7 +197,7 @@ public class SparkOauthServer {
 
 			// get the access token by post to Spark
 			String body = post(Config.TOKEN_URI, ImmutableMap.<String,String>builder()
-					.put("code", code).put("response_type", "code").put("grant_type", "authorization_code").build(),
+					.put("code", code).put("response_type", "code").put("grant_type", "authorization_code").put("redirect_uri", Config.REDIRECT_URI).build(),
 					ImmutableMap.<String,String>builder().put("Authorization", authorizationEncoded).build());
 
 			
