@@ -120,6 +120,7 @@ app.get('/guest_token', function(req, res){
 // See API reference - https://spark.autodesk.com/developers/reference/authentication?deeplink=%2Freference%2Foauth-2.0%2Faccess-token-refresh
 app.get('/refresh_token', function(req, res) {
 
+  var accessToken = req.session.accessToken;
   if (accessToken){  
     var params = "grant_type=refresh_token&refresh_token=" + accessToken.refresh_token,
         url =  API_URL + '/oauth/refreshtoken';
@@ -139,7 +140,7 @@ app.get('/refresh_token', function(req, res) {
 
 //logout endpoint
 app.get('/logout', function(req, res){
-  accessToken = null;
+  req.session.accessToken = null;
   res.redirect('/');
 });
 
