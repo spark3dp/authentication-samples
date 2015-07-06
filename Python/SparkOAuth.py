@@ -21,6 +21,8 @@ CONSUMER_KEY ='APP_KEY'
 #TODO: enter your CLIENT_SECRET from Developer Portal App page
 CONSUMER_SECRET ='APP_SECRET'
 
+REDIRECT_URI = 'http://localhost:8089/callback'
+
 PORT = 8089
 SPARK_ENDPOINT = "https://sandbox.spark.autodesk.com";
 LOGIN_URI = SPARK_ENDPOINT + "/api/v1/oauth/authorize";
@@ -55,7 +57,7 @@ def callback():
 	print "got code: %s" % code
 
 	encodedAuthorizationHeader = base64.b64encode(bytes(CONSUMER_KEY+":"+CONSUMER_SECRET))
-	payload = 'code=%s&response_type=code&grant_type=authorization_code' % code
+	payload = 'code=%s&response_type=code&grant_type=authorization_code&redirect_uri=%s' % (code,REDIRECT_URI)
 	headers = {'Authorization': 'Basic '+encodedAuthorizationHeader, 'Content-type':'application/x-www-form-urlencoded'}
 	res = requests.post(TOKEN_URI,data=payload,headers=headers)
 			
