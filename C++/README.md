@@ -14,7 +14,9 @@ This sample is using [C++ Rest SDK](https://casablanca.codeplex.com/).
 
 You can install C++ Rest SDK from [here](https://casablanca.codeplex.com/wikipage?title=Using%20NuGet%20to%20add%20the%20C%2b%2b%20REST%20SDK%20to%20a%20VS%20project&referringTitle=Documentation).
 
-After Installation, you can replace Oauth2Client.cpp file with the Oauth2Client.cpp file in this repository.
+Please make sure you are using casablanca version that corresponds to your visual studio version.
+
+After Installation, run Oauth2Client.cpp file from this repository.
 
 ## Configuration
 
