@@ -68,31 +68,3 @@ There are two types of authentication available:<br>
             }
             });
 ```
-
-##3. Spark API Call Example
-
-###3.1 Get Asset by ID
-```JavaScript
-SparkDrive.getAsset(new AssetRequest([ASSET_ID]), new ISparkResponse<AssetResponse>() {<br>
-
-            @Override
-            public void onSparkSuccess(AssetResponse responseObject) {
-            }
-            @Override<br>
-            public void onSparkFailure(String errorMessage) {
-             }
-             });
-```
-##4. List of the Spark API Available in the SDK
-
-###4.1 Authentication API
-```JavaScript
-      SparkAuthentication.getGuestToken(...);
-      SparkAuthentication.getAuthorizationCode(..);
-```
-The Authentication API authenticates users and apps and provides access to the Spark API.
-Authentication API documentation: https://spark.autodesk.com/developers/reference/authentication.
-
-##Feedback
-
-Please report bugs or issues to Spark Support at https://spark.autodesk.com/developers/inbox or simply let us know what you think of the SDK.
