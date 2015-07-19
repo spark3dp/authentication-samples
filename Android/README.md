@@ -23,4 +23,4 @@ To run the sample in production (not in the Sandbox) change the SPARK_ENV_TYPE_S
 4) In the Android/SparkSample/src/main/res/values/strings.xml file set the SPARK_API_KEY and SPARK_API_SECRET strings to the value of the API key and secret you were allocated when you registered your app.<br>
 5) Click the Run button on Android Studio.<br>
 
-For more information about authentication see our Authentication API.
+For more information about authentication see our [Authentication API](https://spark.autodesk.com/developers/reference/authentication).
