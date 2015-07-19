@@ -20,7 +20,7 @@ Spark.init(this,key,secret,Constants.SPARK_ENV_TYPE_SANDBOX);
 ```
 Replace "key" and "secret" with the app key and app secret allocated when you registered your app.<br>
 To run the sample in production (not in the Sandbox) change the SPARK_ENV_TYPE_SANDBOX to SPARK_ENV_TYPE_PRODUCTION.<br>
-4) In the Android/SparkSample/src/main/res/values/strings.xml file set the SPARK_API_KEY and SPARK_API_SECRET strings to the value of the API key and secret you were allocated when you registered your app.<br>
-5) Click the Run button on Android Studio.<br>
+4) In the Android/SparkSample/src/main/res/values/strings.xml file set the <b>SPARK_API_KEY</b> and <b>SPARK_API_SECRET</b> strings to the value of the API key and secret you were allocated when you registered your app.<br>
+5) Click the <b>Run</b> button on Android Studio.<br>
 
 For more information about authentication see our [Authentication API](https://spark.autodesk.com/developers/reference/authentication).
