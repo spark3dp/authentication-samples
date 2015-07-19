@@ -12,15 +12,15 @@ Calls to Spark APIs require an access token in the authorization header. This si
 
 ##Running the app
 
-1) Download the sample apps from https://github.com/spark3dp/authentication-samples.
-2) In the Android Studio <i>Quick Start</i> menu, select <i>Open an existing Android Studio project</i>. 
-3) Locate the downloaded authentication samples and select the Android folder. In the Android/SparkSample/src/main/java/com/autodesk/spark/sdk/example/SelectionActivity.java file, go to line 39:  
+1) Download the sample apps from https://github.com/spark3dp/authentication-samples.<br>
+2) In the Android Studio <i>Quick Start</i> menu, select <i>Open an existing Android Studio project</i>. <br>
+3) Locate the downloaded authentication samples and select the Android folder. <br>In the Android/SparkSample/src/main/java/com/autodesk/spark/sdk/example/SelectionActivity.java file, go to line 39:  
 ```Java
 Spark.init(this,key,secret,Constants.SPARK_ENV_TYPE_SANDBOX);
 ```
-Replace "key" and "secret" with the app key and app secret allocated when you registered your app.
-To run the sample in production (not in the Sandbox) change the SPARK_ENV_TYPE_SANDBOX to SPARK_ENV_TYPE_PRODUCTION.
-4) In the Android/SparkSample/src/main/res/values/strings.xml file set the SPARK_API_KEY and SPARK_API_SECRET strings to the value of the API key and secret you were allocated when you registered your app.
-5) Click the Run button on Android Studio.
+Replace "key" and "secret" with the app key and app secret allocated when you registered your app.<br>
+To run the sample in production (not in the Sandbox) change the SPARK_ENV_TYPE_SANDBOX to SPARK_ENV_TYPE_PRODUCTION.<br>
+4) In the Android/SparkSample/src/main/res/values/strings.xml file set the SPARK_API_KEY and SPARK_API_SECRET strings to the value of the API key and secret you were allocated when you registered your app.<br>
+5) Click the Run button on Android Studio.<br>
 
 For more information about authentication see our Authentication API.
