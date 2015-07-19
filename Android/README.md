@@ -1,13 +1,13 @@
 #spark-auth-sample-android
 
-Calls to Spark APIs require an access token in the authorization header. This simple apps demonstrates getting an access token.  Use it to get started with the Spark APIs.
+Calls to Spark APIs require an access token in the authorization header. This simple Android app demonstrates getting an access token.  Use it to get started with the Spark APIs.
 
 <b>Spark APIs are current in beta: [Request access](https://spark.autodesk.com/developers/).</b>
 
 ##Prerequisites for running this app
 
-* This help text describes how to run the app in the Android Studio development environment.
-* It requires that you have the [Spark Android SDK](https://github.com/spark3dp/spark-android-SDK) installed in Android Studio.
+* The Android Studio development environment.
+* The [Spark Android SDK](https://github.com/spark3dp/spark-android-SDK) installed in Android Studio.
 * To use the Spark Android SDK you must first <i>add an app</i> on the [Spark Developer’s Portal](https://spark.autodesk.com/developers/myApps) and save the app key and app secret Spark generates. For more information see [the tutorial](https://spark.autodesk.com/developers/reference/introduction/tutorials/register-an-app).
 
 ##Running the app
