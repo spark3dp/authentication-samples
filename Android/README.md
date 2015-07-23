@@ -1,70 +1,26 @@
 #spark-auth-sample-android
 
-This open-source SDK library enables you to easily integrate the Spark 3D printing API into your Android applications.<br>
-Spark APIs are web based RESTful APIs providing an open, free and complete toolkit of professional-grade resources for 3D printing and related manufacturing processes.
+Calls to Spark APIs require an access token in the authorization header. This simple Android app demonstrates getting an access token.  Use it to get started with the Spark APIs.
 
 <b>Spark APIs are current in beta: [Request access](https://spark.autodesk.com/developers/).</b>
 
-##Getting Started
+##Prerequisites for running this app
 
-Download this repository and import it into your project.
+* The Android Studio development environment.
+* The [Spark Android SDK](https://github.com/spark3dp/spark-android-SDK) installed in Android Studio.
+* To use the Spark Android SDK you must first <i>add an app</i> on the [Spark Developer’s Portal](https://spark.autodesk.com/developers/myApps) and save the app key and app secret Spark generates. For more information see [the tutorial](https://spark.autodesk.com/developers/reference/introduction/tutorials/register-an-app).
 
-The Spark Android SDK comes with a sample app, located in the library’s App folder.
+##Running the app
 
-To use the Spark Android SDK you must first <i>add an app</i> on the [Spark Developer’s Portal](https://spark.autodesk.com/developers/myApps) and save the app key and app secret Spark generates. For more information see [the tutorial](https://spark.autodesk.com/developers/reference/introduction/tutorials/register-an-app).
-
-##Setting Up the SDK
-
-##1. Initialization
-
-Call the init method passing the app key and app secret allocated by the [developer portal](https://spark.autodesk.com/developers/myApps):
-```JavaScript
-Spark.init(this, [APPKEY], [APPSECRET],[ENV_TYPE]);
+1) Download the sample apps from https://github.com/spark3dp/authentication-samples.<br>
+2) In the Android Studio <i>Quick Start</i> menu, select <i>Open an existing Android Studio project</i>. <br>
+3) Locate the downloaded authentication samples and select the Android folder. <br>In the Android/SparkSample/src/main/java/com/autodesk/spark/sdk/example/SelectionActivity.java file, go to line 39:  
+```Java
+Spark.init(this,key,secret,Constants.SPARK_ENV_TYPE_SANDBOX);
 ```
-Enable debug mode to see logcat messages regarding your configuration and any error messages or notifications.<br>
-```JavaScript
-Spark.setDebugMode(true);
-```
+Replace "key" and "secret" with the app key and app secret allocated when you registered your app.<br>
+To run the sample in production (not in the Sandbox) change the SPARK_ENV_TYPE_SANDBOX to SPARK_ENV_TYPE_PRODUCTION.<br>
+4) In the Android/SparkSample/src/main/res/values/strings.xml file set the <b>SPARK_API_KEY</b> and <b>SPARK_API_SECRET</b> strings to the value of the API key and secret you were allocated when you registered your app.<br>
+5) Click the <b>Run</b> button on Android Studio.<br>
 
-##2. Authentication
-
-Spark API use OAUTH 2.0 authentication.<br>
-There are two types of authentication available:<br>
-* Guest Token - For read only permissions. Gives you access to public data on Spark.
-* Access Token - For read\write access to a Spark member’s private data. Access Tokens log the user in from your app.
-
-###2.1 Generate a Guest Token
-
-```JavaScript
-       SparkAuthentication.getGuestToken(new ISparkResponse<AccessTokenResponse>() {
-            @Override
-            public void onSparkSuccess(AccessTokenResponse responseObject) {
-                ((EditText)
-
-             // Success !
-             // Call Spark API
-            }
-
-            @Override
-            public void onSparkFailure(String errorMessage) {
-	        // Failure
-            // Check error message
-            }
-        });
-```
-
-###2.2  Get Access Token
-```JavaScript
-       SparkAuthentication.getAuthorizationCode(getActivity(),new ISparkResponse<AccessTokenResponse>() {
-            @Override
-            public void onSparkSuccess(AccessTokenResponse responseObject) {
-            // Success !
-	        // Call Spark API
-           }
-            @Override
-            public void onSparkFailure(String errorMessage) {
-            // Failure
-            // Check error message
-            }
-            });
-```
+For more information about authentication see our [Authentication API](https://spark.autodesk.com/developers/reference/authentication).

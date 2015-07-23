@@ -1,4 +1,19 @@
 /***
+* ==++==
+*
+* Copyright (c) Microsoft Corporation. All rights reserved.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* ==--==
 * =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 *
 * Oauth2Client.cpp : Defines the entry point for the console application
@@ -10,17 +25,20 @@
 
 INSTRUCTIONS
 
-This sample performs authorization code grant flow with OAuth 2.0.
+This sample performs authorization code grant flow on various OAuth 2.0
+services and then requests basic user information.
 
 This sample is for Windows Desktop, OS X and Linux.
+Execute with administrator privileges.
 
-Set the app key & app secret strings below (i.e. s_spark_key, s_spark_secret)
-To get key & secret, register an app in the spark developer portal: https://spark.autodesk.com/developers.
+Set the app key & secret strings below (i.e. s_dropbox_key, s_dropbox_secret, etc.)
+To get key & secret, register an app in the corresponding service.
 
+Set following entry in the hosts file:
+127.0.0.1    testhost.local
 
 */
 #include "stdafx.h"
-#include <mutex>
 
 #if defined(_WIN32) && !defined(__cplusplus_winrt)
 // Extra includes for Windows desktop.
@@ -39,7 +57,7 @@ using namespace web::http::oauth2::experimental;
 using namespace web::http::experimental::listener;
 
 //
-// Set key & secret pair to enable access to spark APIs.
+// Set key & secret pair to enable session for that service.
 //
 static const utility::string_t s_spark_key(U("APP_KEY"));
 static const utility::string_t s_spark_secret(U("APP_SECRET"));

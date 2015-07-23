@@ -1,25 +1,23 @@
 # spark-auth-sample-php
 
-This is a sample code for using spark authentication api.
+This code sample demonstrates use of the Spark authentication API.
 
-## Create application on Spark developer portal
+## Create an application on the Spark developers' portal
 
-Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
+Sign up to the [Spark developers' portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 
-Set you Callback URL to be the path to where you browse auth.php.
-
-Don't forget to add http:// or https:// prefix to the Callback URL.
+Set the Callback URL in the app setting's API Keys tab to the full path where you browse auth.php (prefixed by http:// or https://).
 
 ## Configuration
 
 Open the config.php file:
 
- 1. Replace INSERT_APP_KEY_HERE with your App Key.
+ 1. Set INSERT_APP_KEY_HERE to your App Key.
 
- 2. Replace INSERT_SECRET_HERE with your App Secret.
+ 2. Set INSERT_SECRET_HERE to your App Secret.
 
 ## Usage
 
-To start using this sample you just have to browse auth.php
+To run this sample, browse to auth.php
 
 

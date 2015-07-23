@@ -1,29 +1,29 @@
 # spark-auth-sample-python
 
-This is a sample code for using spark authentication api.
+This sample code demonstrates use of the Spark authentication API.
 
-## Create application on Spark developer portal
+## Create an application on the Spark developers' portal
 
-Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
+Sign up to the [Spark developers' portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 
-Set you Callback URL to http://localhost:8089/callback.
+In the app setting's API Keys tab, set the Callback URL to http://localhost:8089/callback.
 
 ## Configuration
 
 Open the SparkOAuth.py file:
 
- 1. Replace CONSUMER_KEY with your App Key.
+ 1. Set the CONSUMER_KEY to your App Key.
 
- 2. Replace CONSUMER_SECRET with your App Secret.
+ 2. Set the CONSUMER_SECRET to your App Secret.
 
 ## Usage
 
-To start using this sample:
+To run this sample:
 
- 0. Open terminal and "cd" to the directory
+ 1. Open a terminal and "cd" to the directory
 
- 1. run "sudo pip install -r requirements.txt". (if you don't have "pip" - please install it by running "sudo easy_install pip")
+ 2. Run "sudo pip install -r requirements.txt". (if you don't have "pip" - please install it by running "sudo easy_install pip")
 
- 2. run "python SparkOAuth.py".
+ 3. Run "python SparkOAuth.py".
 
- 3. Open in your favorite browser: http://localhost:8089
+ 4. In your favorite browser, open http://localhost:8089
