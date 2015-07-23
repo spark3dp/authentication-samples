@@ -1,5 +1,5 @@
 assets/scripts/config.js
-scripts/config.js
-server/nodejs/config.js
-server/nodejs/node_modules
+server-login/assets/scripts/config.js
+server-login/server/nodejs/config.js
+server-login/server/nodejs/node_modules
 .idea
