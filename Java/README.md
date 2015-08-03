@@ -1,8 +1,8 @@
 # spark-auth-sample-java
 
-This is a sample code for using spark authentication api.
+This code sample demonstrates use of the Spark authentication API.
 
-## Create application on Spark developer portal
+## Create an application on the Spark developers portal
 
 Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and create a new application [here](https://spark.autodesk.com/developers/getStarted).
 

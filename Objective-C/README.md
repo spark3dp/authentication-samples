@@ -1,17 +1,19 @@
-This tutorial describes how to run the Objective C version of the quick start app.
-The app generates an access token, authenticating the app user and giving full access to the Spark APIs for a single session.
-It can also be used to generate a guest token and to refresh an access token. 
-For more information about authentication see our Authentication API.
+# spark-auth-sample-objective_c
 
-To run this sample app, you must register an app on the Spark developers' portal.
+This tutorial describes how to run the Objective C version of the quick start app.
+The app generates an access token, authenticates the app's user and gives full access to the Spark APIs for a single session.
+It can also be used to generate a guest token and to refresh an access token. 
+For more information about authentication see our [Authentication API](https://spark.autodesk.com/developers/reference/authentication).
+
+To run this sample app, you must register an app on the Spark Developers portal.
 
 1) Download the sample apps from https://github.com/spark3dp/authentication-samples and copy the Objective C folder. 
 
 2) Locate the _AppDelegate.m_ file in the Objective C folder, _Spark-sdk-demo_ and change the following:<br>
     Under - (BOOL)application: didFinishLaunchingWithOptions:
 <ul>
-  <li> Set appKey to the App Key provided when you registered your app on the Spark developers' portal.</li>
-  <li> Set appSecret to the App Secret provided when you registered your app on the Spark developers' portal.</li>
+  <li> Set appKey to the App Key provided when you registered your app on the Spark Developers portal.</li>
+  <li> Set appSecret to the App Secret provided when you registered your app on the Spark Developers portal.</li>
 </ul>	
 ```C
 // In real world apps, these values need to be secured and not hardcoded.
