@@ -21,7 +21,7 @@ NSString *appKey = "INSERT_APP_KEY_HERE";
 NSString *appSecret = "INSERT_SECRET_HERE";
 ```
 
-3)  To use the Spark SDK, download it from (here)[https://github.com/spark3dp/spark-iOS-SDK], include it in your project and initialize the "SparkManager".
+3)  To use the Spark SDK, download it from [here](https://github.com/spark3dp/spark-iOS-SDK), include it in your project and initialize the "SparkManager".
 ```C
 [[SparkManager sharedInstance] initKey:appKey appSecret:appSecret envType:SPARK_ENV_TYPE_SANBOX];
 [[SparkManager sharedInstance] setDebugMode:YES]; 
