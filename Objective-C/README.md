@@ -5,7 +5,7 @@ The app generates an access token, authenticates the app's user and gives full a
 It can also be used to generate a guest token and to refresh an access token. 
 For more information about authentication see our [Authentication API](https://spark.autodesk.com/developers/reference/authentication).
 
-To run this sample app, you must register an app on the Spark Developers portal.
+To run this sample app, you must [register an app](https://spark.autodesk.com/developers/getStarted) on the Spark Developers portal.
 
 1) Download the sample apps from https://github.com/spark3dp/authentication-samples and copy the Objective C folder. 
 
