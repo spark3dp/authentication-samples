@@ -1,6 +1,6 @@
 # authentication-samples
 
-This is a list of samples in various languages for using spark authentication api.
+This is a list of samples in various languages for using the Spark authentication API.
 
 ## Create an application on Spark developer portal
 
@@ -8,15 +8,16 @@ Sign up to [Spark developer portal](https://spark.autodesk.com/developers/) and 
 
 ## Working with a specific sample
 
-Use a language specific sample that suits your needs best. Each sample has it's own set of configuration which you can see in the specific sample's README.md
+Select the language you prefer. See the sample's readme for any configuration settings.
 
 ## Other languages
 
-We are currently maintaining SDKs that wrap around the Spark APIs. These SDKs include: 
+We maintain SDKs that wrap the Spark APIs and simplify API use: 
 
 * [JavaScript](https://github.com/spark3dp/spark-js-SDK)
 * [Android](https://github.com/spark3dp/spark-android-SDK)
 * [Objective-C](https://github.com/spark3dp/spark-iOS-SDK) 
 
 ## Feedback
-Please report bugs or issues to Spark Support at https://spark.autodesk.com/developers/inbox or simply let us know if you would be interested that we would add samples in additional languages.
+Please report bugs or issues to Spark Support at https://spark.autodesk.com/developers/inbox. 
+Let us know if you want samples in other languages.
