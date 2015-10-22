@@ -2,6 +2,9 @@
 
 include('config.php');
 
+error_reporting(E_ERROR);
+
+
 function getRedirectUrl(){
     $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
     return $protocol . $_SERVER['HTTP_HOST'] . strtok($_SERVER["REQUEST_URI"],'?');
@@ -44,6 +47,9 @@ function refreshAccessToken(){
         "Authorization: Basic " . base64_encode(APP_ID . ":" . APP_SECRET)
     ));
 
+    //Don't use this in production!
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
     // Send the request & save response to $resp
     $resp = curl_exec($curl);
@@ -83,6 +89,9 @@ function getGuestToken(){
         "Authorization: Basic " . base64_encode(APP_ID . ":" . APP_SECRET)
     ));
 
+    //Don't use this in production!
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
     // Send the request & save response to $resp
     $resp = curl_exec($curl);
@@ -121,6 +130,10 @@ function getAccessToken($code)
         "Content-Type: application/x-www-form-urlencoded",
         "Authorization: Basic " . base64_encode(APP_ID . ":" . APP_SECRET)
     ));
+
+    //Don't use this in production!
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
 
     // Send the request & save response to $resp
