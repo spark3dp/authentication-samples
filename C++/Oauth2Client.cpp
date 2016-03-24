@@ -9,6 +9,7 @@
 *
 * Unless required by applicable law or agreed to in writing, software
 * distributed under the License is distributed on an "AS IS" BASIS,
+
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
 * limitations under the License.
@@ -38,12 +39,12 @@ Set following entry in the hosts file:
 127.0.0.1    testhost.local
 
 */
-#include "stdafx.h"
 
 #if defined(_WIN32) && !defined(__cplusplus_winrt)
 // Extra includes for Windows desktop.
 #include <windows.h>
 #include <Shellapi.h>
+
 #endif
 
 #include "cpprest/http_listener.h"
@@ -61,6 +62,8 @@ using namespace web::http::experimental::listener;
 //
 static const utility::string_t s_spark_key(U("APP_KEY"));
 static const utility::string_t s_spark_secret(U("APP_SECRET"));
+static const utility::string_t s_spark_callback_url(U("http://localhost:8889/"));
+
 
 //
 // Utility method to open browser on Windows, OS X and Linux systems.
@@ -105,8 +108,13 @@ public:
                 {
                     try
                     {
+                        // This example uses the task::wait method to ensure that async operations complete before the app exits.  
+                        // In most apps, you typically don't wait for async operations to complete.
                         token_task.wait();
                         m_tce.set(true);
+                        auto token = m_config.token().access_token(); // Get the access token
+                        ucout << "Access Token: " << token << std::endl;
+
                     }
                     catch (const oauth2_exception& e)
                     {
@@ -115,7 +123,7 @@ public:
                     }
                 });
 
-                request.reply(status_codes::OK, U("Ok."));
+                request.reply(status_codes::OK, U("Ok. Check your console now for an access token."));
 
                 m_resplock.unlock();
             }
@@ -125,11 +133,16 @@ public:
             }
         });
 
+
+        // This example uses the task::wait method to ensure that async operations complete before the app exits.  
+        // In most apps, you typically don't wait for async operations to complete.
         m_listener->open().wait();
     }
 
     ~oauth2_code_listener()
     {
+        // This example uses the task::wait method to ensure that async operations complete before the app exits.  
+        // In most apps, you typically don't wait for async operations to complete.
         m_listener->close().wait();
     }
 
@@ -228,22 +241,22 @@ private:
 class spark_session_sample : public oauth2_session_sample
 {
 public:
-	spark_session_sample() :
-		oauth2_session_sample(U("Spark"),
-			s_spark_key,
-			s_spark_secret,
-			U("https://sandbox.spark.autodesk.com/api/v1/oauth/authorize"),
-			U("https://sandbox.spark.autodesk.com/api/v1/oauth/accesstoken"),
-			U("http://localhost:8889/"))
-	{
-		// Spark uses "default" OAuth 2.0 settings.
-	}
+    spark_session_sample() :
+        oauth2_session_sample(U("Spark"),
+            s_spark_key,
+            s_spark_secret,
+            U("https://sandbox.spark.autodesk.com/api/v1/oauth/authorize"),
+            U("https://sandbox.spark.autodesk.com/api/v1/oauth/accesstoken"),
+            s_spark_callback_url)
+    {
+        // Spark uses "default" OAuth 2.0 settings.
+    }
 
 protected:
-	void run_internal() override
-	{
-		http_client api(U("https://sandbox.spark.autodesk.com/api/v1"), m_http_config);
-	}
+    void run_internal() override
+    {
+        http_client api(U("https://sandbox.spark.autodesk.com/api/v1"), m_http_config);
+    }
 };
 
 
@@ -255,8 +268,8 @@ int main(int argc, char *argv[])
 {
     ucout << "Running OAuth 2.0 client sample..." << std::endl;
 
-	 spark_session_sample spark;
-	 spark.run();
+     spark_session_sample spark;
+     spark.run();
 
     ucout << "Done." << std::endl;
     return 0;
