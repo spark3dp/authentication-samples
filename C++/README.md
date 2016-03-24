@@ -143,7 +143,7 @@ Example response:
 ### Run the create asset API sample code
 Assets are objects that contain all the files and data related to a 3D model. For more information, see <a href="https://spark.autodesk.com/developers/reference/drive?deeplink=/reference/assets" target="_blank">Asset API documentation</a>
 
-Run the *createAsset* project with the following parameters: <access_token> <asset_name_for_new_asset> <description_of_asset> <asset_tags>.
+Run the *createAsset* project with the following parameters: `<access_token> <asset_name_for_new_asset> <description_of_asset>`.
 
 Example response:
 
@@ -158,7 +158,7 @@ Example response:
 
 When an uploaded file is added to an asset it is called a source file. For more details about source files, see <a href="https://spark.autodesk.com/developers/reference/drive?deeplink=/reference/assets/asset-sources" target="_blank">Source file API documentation</a>.<br>
 
-Run the *createSource* project with the following parameters: <access_token> <asset_id_of_created_asset> <file_id_of_uploaded_file>
+Run the *createSource* project with the following parameters: `<access_token> <asset_id_of_created_asset> <file_id_of_uploaded_file>`
 
 Example response:
 
