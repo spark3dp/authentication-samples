@@ -124,7 +124,7 @@ Open the *Oauth2Client.cpp* file found in the the *OAuth2Client* project, and re
 
 ### Run the upload file API sample code
 
-Run the *uploadFile* project with the following parameters: <access_token> <asset_name_for_new_asset> <description_of_asset> <asset_tags>.
+Run the *uploadFile* project with the following parameters: `<access_token> <file_to_upload>`.
 Note that you must include a file extension.
 
 Example response:
