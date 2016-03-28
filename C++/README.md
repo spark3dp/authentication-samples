@@ -15,8 +15,8 @@ Follow the instructions below for [Mac](#Mac), [Linux](#Mac) or [Windows](#Windo
 ### Installation
 
 1. Download and install <a href="https://github.com/Microsoft/cpprestsdk/wiki" target="_blank">C++ REST SDK</a>.
-<br>(Additional installation for **Linux** and **MAC OS X**) From the terminal, navigate to the *casablanca/build.release* folder (if you do not have this folder, navigate to the *casablanca/build.debug* folder). Install *libcpprest* by running `make install`.
-2. Download the *authentication-samples* repository.
+2. From the terminal, navigate to the *casablanca/build.release* folder (if you do not have this folder, navigate to the *casablanca/build.debug* folder). Install *libcpprest* by running `make install`.
+3. Download the *authentication-samples* repository.
 
 ### Create an app on the Spark Developer portal
 
