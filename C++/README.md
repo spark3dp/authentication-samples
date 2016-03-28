@@ -8,9 +8,9 @@ This C++ sample code demonstrates how to use the following Spark APIs:
 
 Note that to run this sample code, you need to be able to open an internet browser and enter your Spark login details.
 
-Follow the instructions below for Windows (link) or Mac (link).
+Follow the instructions below for [Mac](#Mac), [Linux](#Mac) or [Windows](#Windows). 
 
-## Instructions for Mac
+## <a name="Mac"></a>Instructions for Mac and Linux
 
 ### Installation
 
@@ -59,7 +59,7 @@ Example response:
 {
   "files": [
     {
-      "name": "README.md",
+      "name": "report.jpg",
       "md5sum": "6dd6539899b42d9fb9737a76c8fdb889",
       "file_id": 18112641,
       "public_url": "http://static.spark.autodesk.com/Public/Beta/report.jpg"
@@ -95,15 +95,16 @@ Example response:
 }
 ```
 
-##Instructions for Windows
+## <a name="Windows"></a>Instructions for Windows
+
+Note that this example uses Microsoft Visual Studio 2015.
 
 ### Installation
 
 1. Download the *authentication-samples* repository.
-2. Navigate to the *authentication-samples>c++>Windows* folder and double-click *cpp-sample.app.sln*. Visual Studio is launched.
+2. Navigate to the *authentication-samples>c++>Windows* folder and open *cpp-sample.app.sln*. Visual Studio is launched.
 3. In the right-hand pane in Visual Studio, right-click *Solution cpp-sample.app* and select **Manage NuGet Packages for Solution**. The **Manage Packages for Solution** window opens.
-4. Search for *cpprestsdk*, select *cpprestsdk.v140.Windesktop.msvcstl.dyn.rt-dyn*, and choose all the repository projects.
-5. Select the **Install button**. The **Preview** window opens. Select OK. A **Successfully installed** message is displayed.
+4. Search for *cpprestsdk*, select *cpprestsdk.<version>* (this examples uses *cpprestsdk.v140.Windesktop.msvcstl.dyn.rt-dyn*), choose all the repository projects and install it.
 
 ### Create an app on the Spark Developer portal
 
@@ -120,11 +121,11 @@ Open the *Oauth2Client.cpp* file found in the the *OAuth2Client* project, and re
 
 1.	Run the *OAuth2Client* project (Ctrl + F5). A browser window opens displaying the Spark login screen.
 2.	Log in with your username and password. A message appears informing you that your access token has been sent to the terminal.
-3.	Make a note of the access token, which you need to run other APIs. Make a note of the access token, which you need to run other APIs.
+3.	Make a note of the access token, which you need to run other APIs.
 
 ### Run the upload file API sample code
 
-Run the *uploadFile* project with the following parameters (Command Arguments): `<access_token> <file_to_upload>`.
+Run the *uploadFile* project with the following parameters (command arguments): `<access_token> <file_to_upload>`.
 Note that you must include a file extension.
 
 Example response:
@@ -143,7 +144,7 @@ Example response:
 ### Run the create asset API sample code
 Assets are objects that contain all the files and data related to a 3D model. For more information, see <a href="https://spark.autodesk.com/developers/reference/drive?deeplink=/reference/assets" target="_blank">Asset API documentation</a>
 
-Run the *createAsset* project with the following parameters (Command Arguments): `<access_token> <asset_name_for_new_asset> <description_of_asset>`.
+Run the *createAsset* project with the following parameters (command arguments): `<access_token> <asset_name_for_new_asset> <description_of_asset>`.
 
 Example response:
 
@@ -158,7 +159,7 @@ Example response:
 
 When an uploaded file is added to an asset it is called a source file. For more details about source files, see <a href="https://spark.autodesk.com/developers/reference/drive?deeplink=/reference/assets/asset-sources" target="_blank">Source file API documentation</a>.<br>
 
-Run the *createSource* project with the following parameters (Command Arguments): `<access_token> <asset_id_of_created_asset> <file_id_of_uploaded_file>`
+Run the *createSource* project with the following parameters (command arguments): `<access_token> <asset_id_of_created_asset> <file_id_of_uploaded_file>`
 
 Example response:
 
